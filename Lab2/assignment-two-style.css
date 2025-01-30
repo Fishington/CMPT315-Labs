@@ -1,0 +1,103 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header,footer {
+    padding: 5px;
+    background-color: goldenrod;
+    text-align: center;
+    margin: auto;
+}
+main {
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin: auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+
+form{
+    padding-right: 20px;
+    margin-bottom: 20px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+button {
+    margin-top: 16px;
+    padding: 10px 20px;
+    background-color: grey;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #007bff;
+}
+
+#category {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#province {
+    width: 60%;
+    padding-right: 20px;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+nav a {
+    display: inline-block; /* Makes the links sit side-by-side */
+    padding: 10px 15px; /* Adds some spacing around the text */
+    text-decoration: none; /* Removes underlines from links */
+    color: #333; /* Sets a dark gray color for the text */
+    font-weight: bold; /* Makes the text slightly bolder */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transitions for hover effects */
+    border-radius: 5px; /* Optional: Adds rounded corners */
+  }
+
+  nav a:hover {
+    background-color: #eee; /* Light gray background on hover */
+    color: #007bff; /* Blue color on hover */
+  }
+
+  .checkbox {
+    display: flex;
+    gap: 10px;
+  }
+
+
+  #infoTable tbody tr:hover {
+    background-color: #a0a0a0; /* Light gray background on hover */
+    cursor: pointer; /* Optional: Change cursor to a pointer on hover */
+  }
+
