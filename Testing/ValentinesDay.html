@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>3D Rotating Heart</title>
+<style>
+    
+  body {background-color: black ; margin: 0; overflow: hidden; }
+  canvas { display: block; }
+
+  body { 
+    margin: 0; 
+    overflow: hidden; /* Prevent scrollbars */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Horizontally center content */
+    align-items: center; /* Vertically center content */
+    height: 100vh; /* Ensure full viewport height */
+  }
+  canvas { display: block; } /* Make the canvas fill its container */
+  #text-container {
+    font-family: Arial, sans-serif;
+    position: absolute; /* Position the text over the canvas */
+    bottom: 230px; /* Adjust distance from bottom */
+    text-align: center; /* Center text */
+    width: 100%; /* Make sure it spans the whole width */
+    color: red; /* Set text color */
+    font-size: 48px; /* Set text size */
+    font-weight: bold;
+    pointer-events: none; /* Allow clicks to pass through */
+  }
+  #small-text-container {
+    font-family: Arial, sans-serif;
+    position: absolute; /* Position the text over the canvas */
+    bottom: 170px; /* Adjust distance from bottom */
+    text-align: center; /* Center text */
+    width: 100%; /* Make sure it spans the whole width */
+    color: red; /* Set text color */
+    font-size: 16px; /* Set text size */
+    font-weight: bold;
+    pointer-events: none; /* Allow clicks to pass through */
+  }
+
+</style>
+</head>
+<body>
+    <div id="text-container">Happy Valentine's Day!</div>
+    <div id="small-text-container">Roses are red, violets are blue, <br>
+                                    My code compiles, thanks to you! <br>
+                                    Happy Valentine's Day!
+                                </div>
+<script src="https://cdn.jsdelivr.net/npm/three@latest/build/three.min.js"></script>
+<script>
+  // Scene, Camera, Renderer
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera( 120, window.innerWidth / window.innerHeight, 0.1, 1000 );
+  const renderer = new THREE.WebGLRenderer();
+  renderer.setSize( window.innerWidth, window.innerHeight );
+  document.body.appendChild( renderer.domElement );
+
+  // Heart Geometry (Simple Example - You can use a more complex model)
+  const heartShape = new THREE.Shape();
+  
+  const x = 0, y = 50;
+  heartShape.moveTo(x, y - 25); // Start at the bottom (y is now negative)
+heartShape.bezierCurveTo(x + 25, y - 10, x + 50, y - 10, x + 50, y - 35); // All y values are negated
+heartShape.bezierCurveTo(x + 50, y - 55, x + 30, y - 75, x, y - 95);
+heartShape.bezierCurveTo(x - 30, y - 75, x - 50, y - 55, x - 50, y - 35);
+heartShape.bezierCurveTo(x - 50, y - 10, x - 25, y - 10, x, y - 25);
+
+  const extrudeSettings = { depth: 10, bevelEnabled: true, bevelSegments: 3, steps: 3, bevelSize: 3, bevelThickness: 1 };
+  const heartGeometry = new THREE.ExtrudeGeometry( heartShape, extrudeSettings );
+
+  // Heart Material
+  const heartMaterial = new THREE.MeshPhongMaterial( { color: 0xff0000, specular: 0xffffff, shininess: 30 } ); // Red with shine
+
+  // Heart Mesh
+  const heart = new THREE.Mesh( heartGeometry, heartMaterial );
+  scene.add( heart );
+
+  // Lighting (Important for seeing the 3D effect)
+  const ambientLight = new THREE.AmbientLight( 0x404040 ); // Soft overall light
+  scene.add( ambientLight );
+
+  const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.8 ); // A directed light
+  directionalLight.position.set( 1, 1, 1 ).normalize();
+  scene.add( directionalLight );
+
+    //Optional: Add a back light
+    const directionalLightBack = new THREE.DirectionalLight( 0xffffff, 0.4 ); // A directed light
+    directionalLightBack.position.set( -1, -1, -1 ).normalize();
+    scene.add( directionalLightBack );
+
+  // Position the camera
+  camera.position.z = 120;
+
+  // Animation loop
+  function animate() {
+    requestAnimationFrame( animate );
+    heart.rotation.y += 0.025; // Rotate the heart
+    renderer.render( scene, camera );
+  }
+
+  animate();
+
+  // Handle window resize
+  window.addEventListener( 'resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize( window.innerWidth, window.innerHeight );
+  }, false );
+
+</script>
+</body>
+</html>
